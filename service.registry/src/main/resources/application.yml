@@ -1,0 +1,18 @@
+# define hostname.
+eureka:
+  instance:
+    hostname: localhost
+# we are using this as a server not as client. So, we need to do client false (default is true)
+
+  client:
+    register-with-eureka: false
+    
+# If this is a client then fetch eureka registry information from eureka server.
+    fetch-registry: false 
+#    serviceUrl:
+#      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+# defining a  port in which this server will up.
+server:
+  port: 1000 
+
+  
