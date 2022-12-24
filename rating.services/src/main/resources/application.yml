@@ -19,13 +19,16 @@ spring:
     dialect: org.hibernate.dialect.MySQL8Dialect
  application:
     name: RATING-SERVICES
-    
-eureka:
-  instance:
-    ip-address: true
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:1000/eureka/
+ config:
+    import:
+    - optional:configserver:http://localhost:8085/
+#    
+#eureka:
+#  instance:
+#    ip-address: true
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:1000/eureka/
   

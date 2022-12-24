@@ -24,12 +24,14 @@ spring:
         uri: lb://RATING-SERVICES
         predicates:
         - Path=/rating/**
-        
-eureka:
-  instance:
-    ip-address: true
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:1000/eureka/
+  config:
+    import:
+    - optional:configserver:http://localhost:8085/
+#eureka:
+#  instance:
+#    ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:1000/eureka/

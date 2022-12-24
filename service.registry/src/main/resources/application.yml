@@ -13,6 +13,6 @@ eureka:
 #      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 # defining a  port in which this server will up.
 server:
-  port: 1000 
+  port: 8761
 
   
