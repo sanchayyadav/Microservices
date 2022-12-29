@@ -16,6 +16,8 @@ import com.microservices.userservices.response.dto.UserListResponseDTO;
 import com.microservices.userservices.response.dto.UserResponseDTO;
 import com.microservices.userservices.service.UserService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -35,6 +37,7 @@ public class UserController {
 	
 	@GetMapping(value="/{userId}",
 			produces=MediaType.APPLICATION_JSON_VALUE)
+	@CircuitBreaker(name = "companyRatingBreaker", fallbackMethod = "companyRatingBreakerFallback")
 	public ResponseEntity<UserResponseDTO> getUsers(@PathVariable String userId){
 		
 		UserResponseDTO userResponseDTO = userService.getUser(userId);
@@ -49,6 +52,18 @@ public class UserController {
 		UserListResponseDTO userResponseDTO = userService.getAllUsers();
 		
 	    return new ResponseEntity<>(userResponseDTO, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<UserResponseDTO> companyRatingBreakerFallback(String user, Exception ex){
+		UserResponseDTO userResponseDTO = UserResponseDTO.
+														builder()
+														.userId("5458-sudebadinf-sjdhb4jbjb-u")
+														.email("sanchayyadav@gmail.com")
+														.name("sanchay")
+														.about("from India")
+														.build();
+		
+		return new ResponseEntity<UserResponseDTO>(userResponseDTO, HttpStatus.OK);
 	}
 	
 }
